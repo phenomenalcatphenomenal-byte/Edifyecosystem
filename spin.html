@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edify Ecosystem | Central Hub for PCAT & SDC + Live Dashboards</title>
+
+    <!-- Existing Stylesheets (Edify) -->
+    <link rel='stylesheet' href='plugins/goodlayers-core/plugins/combine/style.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='plugins/goodlayers-core/include/css/page-builder.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='plugins/revslider/public/assets/css/settings.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/style-core.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/ztudiox-style-custom.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.pexels.com/">
+    <link rel='stylesheet' id='gdlr-core-google-font-css' href='https://fonts.googleapis.com/css?family=Poppins%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2Cregular%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CMontserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2Cregular%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&amp;subset=latin%2Clatin-ext%2Cdevanagari%2Ccyrillic-ext%2Cvietnamese%2Ccyrillic&amp;ver=5.0.3' type='text/css' media='all' />
+
+    <!-- Additional assets for Dashboards -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+     <link href="https://animate.style" rel="stylesheet">
+    
+
+    <!-- GSAP and ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* ========== DASHBOARD STYLES (no holders) ========== */
+        .dashboard-wrapper {
+            background-color: #0d0d0d;
+            padding: 80px 0;
+            position: relative;
+            border-top: 1px solid rgba(197,164,126,0.2);
+            border-bottom: 1px solid rgba(197,164,126,0.2);
+        }
+        .hub-heading {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+        }
+        .hub-heading h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffda4a, #c5a47e, #ffda4a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        .hub-heading p {
+            font-size: 1.2rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+        .hub-heading .highlight {
+            color: #ffda4a;
+            font-weight: 600;
+        }
+        .dashboard-stack {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            padding: 0 20px;
+        }
+        .dashboard-card {
+            width: 100%;
+            background: #141414;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            transition: 0.3s ease;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        .dashboard-header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            padding: 25px 30px;
+            color: white;
+        }
+        .dashboard-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .dashboard-token-name {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .dashboard-network-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .dashboard-header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .dashboard-header-main h2 {
+            font-weight: 300;
+            font-size: 1.5rem;
+        }
+        .dashboard-pancakeswap-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .dashboard-api-status {
+            padding: 12px 30px;
+            background: #1a3a1a;
+            border: 1px solid #2a5a2a;
+            color: #4CAF50;
+            text-align: center;
+            font-weight: 500;
+        }
+        .dashboard-token-info-section {
+            padding: 20px 30px;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .dashboard-token-address {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+        .dashboard-copy-btn {
+            background: none;
+            border: none;
+            color: #c5a47e;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: 0.2s;
+        }
+        .dashboard-copy-btn:hover {
+            transform: scale(1.1);
+            color: #d8b98c;
+        }
+        .dashboard-market-cap {
+            font-weight: 600;
+        }
+        .dashboard-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: #2a2a2a;
+        }
+        .dashboard-stat-item {
+            background: #1a1a1a;
+            padding: 22px 15px;
+            text-align: center;
+            transition: 0.2s;
+        }
+        .dashboard-stat-item:hover {
+            background: #222;
+            transform: translateY(-3px);
+        }
+        .dashboard-stat-label {
+            font-size: 0.75rem;
+            color: #aaa;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .dashboard-stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .dashboard-stat-change {
+            font-size: 0.7rem;
+            margin-top: 5px;
+        }
+        .positive { color: #28a745; }
+        .negative { color: #dc3545; }
+        .dashboard-chart-full-container {
+            background: #1a1a1a;
+        }
+        .dashboard-chart-header {
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .dashboard-chart-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .dashboard-chart-timeframe {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .dashboard-timeframe-btn {
+            padding: 8px 16px;
+            border: 1px solid #444;
+            background: #1a1a1a;
+            color: #ccc;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+        .dashboard-timeframe-btn.active,
+        .dashboard-timeframe-btn:hover {
+            background: #c5a47e;
+            color: #0d0d0d;
+            border-color: #c5a47e;
+        }
+        .chart-wrapper {
+            width: 100%;
+        }
+        .dashboard-dexscreener-chart-expanded {
+            width: 100%;
+            height: 450px;
+            border: none;
+            display: block;
+        }
+        .dashboard-data-source-info {
+            padding: 12px 30px;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #888;
+            border-top: 1px solid #2a2a2a;
+            flex-wrap: wrap;
+        }
+        .dashboard-last-updated {
+            padding: 15px 30px;
+            text-align: center;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid #2a2a2a;
+            font-size: 0.85rem;
+        }
+        .dashboard-update-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28a745;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.4; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+        .dashboard-loading {
+            position: relative;
+            color: transparent !important;
+        }
+        .dashboard-loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #c5a47e;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @media (max-width: 992px) {
+            .dashboard-dexscreener-chart-expanded { height: 350px; }
+        }
+        @media (max-width: 600px) {
+            .dashboard-chart-header { flex-direction: column; align-items: flex-start; }
+            .dashboard-token-info-section { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .dashboard-header-top, .dashboard-header-main { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .dashboard-token-name { font-size: 1.4rem; }
+            .hub-heading h2 { font-size: 2rem; }
+            .dashboard-stats-grid { grid-template-columns: 1fr; gap: 8px; background: transparent; }
+        }
+        .glowing {
+            animation: glow 2s ease-in-out infinite;
+        }
+        @keyframes glow {
+            0%,100% { box-shadow: 0 0 20px rgba(197,164,126,0.2); }
+            50% { box-shadow: 0 0 40px rgba(245, 243, 240, 0.977); }
+        }
+        .btn-buy-small {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 24px;
+            background: #c5a47e;
+            color: #0d0d0d;
+            text-decoration: none;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .btn-buy-small:hover {
+            background: #d8b98c;
+            transform: translateY(-2px);
+        }
+
+        /* Orbit core text – PERFECT CENTER */
+        .orbit-3d-stage {
+            position: relative;
+        }
+        .core-3d {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 40;
+            text-align: center;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(18px);
+            border-radius: 80px;
+            padding: 1rem 2.2rem;
+            border: 1px solid rgba(255,218,74,0.6);
+            white-space: nowrap;
+        }
+        .core-3d h3 {
+            color: #ffffff !important;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+        .core-3d .core-tag {
+            color: #ffda4a;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.7rem;
+            margin-top: 8px;
+        }
+
+        /* Original Edify styles (unchanged) */
+        .crypto-market-section { background: #ffffff; padding: 60px 0; border-top: 1px solid #f0f2f8; border-bottom: 1px solid #f0f2f8; }
+        .crypto-container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+        .crypto-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 30px; }
+        .crypto-title h2 { font-size: 28px; font-weight: 700; color: #0a0a0a; margin: 0; }
+        .crypto-title p { color: #5b6e8c; margin: 5px 0 0; }
+        .crypto-search input { padding: 12px 20px; font-size: 15px; border: 1px solid #e2e8f0; border-radius: 40px; width: 260px; outline: none; font-family: 'Poppins', sans-serif; }
+        .crypto-search input:focus { border-color: #ffda4a; box-shadow: 0 0 0 2px rgba(255,218,74,0.2); }
+        .table-wrapper { overflow-x: auto; border-radius: 20px; border: 1px solid #edf2f7; background: white; }
+        .crypto-table { width: 100%; border-collapse: collapse; font-family: 'Poppins', sans-serif; font-size: 14px; min-width: 900px; }
+        .crypto-table th { background: #f8fafc; padding: 16px 12px; text-align: left; font-weight: 600; cursor: pointer; }
+        .crypto-table td { padding: 14px 12px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+        .coin-cell { display: flex; align-items: center; gap: 10px; }
+        .coin-icon { width: 24px; height: 24px; }
+        .positive { color: #10b981; }
+        .negative { color: #ef4444; }
+        .buy-btn { background: #ffda4a20; border: none; padding: 6px 14px; border-radius: 40px; font-weight: 600; cursor: pointer; }
+        .pagination-controls { display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px; }
+        .trading-chart-container { background: #fff; border-radius: 24px; }
+
+        /* Orbit with background video */
+        .orbit-3d-section {
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at 30% 10%, #0a0a0a, #030303);
+            padding: 100px 0 120px;
+            perspective: 1200px;
+        }
+        .orbit-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            filter: brightness(0.35) blur(2px);
+        }
+        .orbit-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.55);
+            z-index: 1;
+        }
+        .orbit-3d-section .container-3d {
+            position: relative;
+            z-index: 5;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .orbit-headline { text-align: center; margin-bottom: 40px; }
+        .orbit-headline .sub { font-size: 1rem; letter-spacing: 6px; text-transform: uppercase; font-weight: 600; color: #ffda4a; background: rgba(255,218,74,0.12); display: inline-block; padding: 0.3rem 1.5rem; border-radius: 40px; }
+        .orbit-headline h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; background: linear-gradient(135deg, #fff5e0, #ffda4a, #e6b422); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .orbit-track-3d { position: relative; width: 100%; height: 560px; }
+        .orbit-img-3d { position: absolute; width: 88px; height: 88px; border-radius: 50%; cursor: pointer; z-index: 20; }
+        .orbit-img-3d img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; box-shadow: 0 15px 25px -8px rgba(0,0,0,0.4), 0 0 0 3px rgba(255,218,74,0.5); transition: all 0.4s; }
+        .orbit-img-3d:hover img { transform: scale(1.35) translateZ(25px); box-shadow: 0 25px 35px -8px rgba(0,0,0,0.6), 0 0 0 4px #ffda4a; }
+        .orbit-img-3d::after { content: attr(data-label); position: absolute; bottom: -32px; left: 50%; transform: translateX(-50%); background: #111111dd; backdrop-filter: blur(4px); color: #ffdfaa; font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 40px; white-space: nowrap; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+        .orbit-img-3d:hover::after { opacity: 1; bottom: -38px; }
+        .orbit-footer-note { text-align: center; margin-top: 3rem; font-size: 0.8rem; color: #b9a577; background: rgba(0,0,0,0.4); display: inline-block; padding: 0.4rem 1.6rem; border-radius: 60px; }
+
+        /* ===== SMOOTH SCROLL ANIMATIONS (no abrupt plays, tied to scroll position) ===== */
+        .smooth-scroll-section {
+            will-change: transform, opacity;
+        }
+
+        /* ===== DONATE SECTION STYLES ===== */
+        .donate-section {
+            background: linear-gradient(135deg, #0a0a0a 0%, #141414 100%);
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(197,164,126,0.2);
+            border-bottom: 1px solid rgba(197,164,126,0.2);
+        }
+        .donate-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(197,164,126,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .donate-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fffffff;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+        .donate-description {
+            color: #ccc;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        .donate-address-box {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            border: 1px solid rgba(197,164,126,0.3);
+            margin-bottom: 15px;
+        }
+        .donate-address {
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #ffda4a;
+            word-break: break-all;
+            flex: 1;
+            text-align: left;
+        }
+        .donate-copy-btn {
+            background: #c5a47e;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            color: #0d0d0d;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .donate-copy-btn:hover {
+            background: #d8b98c;
+            transform: translateY(-2px);
+        }
+        .donate-note {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 20px;
+        }
+        .qr-code {
+            margin-top: 20px;
+            display: inline-block;
+            background: white;
+            padding: 10px;
+            border-radius: 16px;
+        }
+        @media (max-width: 600px) {
+            .donate-container { padding: 25px; }
+            .donate-address { font-size: 0.8rem; }
+            .donate-title { font-size: 1.5rem; }
+        }
+
+        /* ===== NEW MODERN FOOTER (quick links match main nav) ===== */
+        .new-footer {
+            background: linear-gradient(135deg, #0a0a0a 0%, #050505 100%);
+            color: #aaa;
+            padding: 60px 0 20px;
+            border-top: 1px solid rgba(197, 164, 126, 0.2);
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+        }
+        .new-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #c5a47e, #ffda4a, #c5a47e);
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 {
+            color: #ffda4a;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        .footer-col h4:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #c5a47e;
+        }
+        .footer-col p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+        .footer-col ul li a:hover {
+            color: #ffda4a;
+            padding-left: 5px;
+        }
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            color: #c5a47e;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        .footer-social a:hover {
+            background: #c5a47e;
+            color: #0d0d0d;
+            transform: translateY(-3px);
+        }
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .newsletter-form input {
+            padding: 12px 15px;
+            border: 1px solid rgba(197,164,126,0.3);
+            background: rgba(0,0,0,0.5);
+            border-radius: 30px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .newsletter-form input:focus {
+            border-color: #ffda4a;
+        }
+        .newsletter-form button {
+            background: linear-gradient(45deg, #c5a47e, #d4b48f);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: #0d0d0d;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(197,164,126,0.4);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #777;
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* Smooth scroll with offset for fixed header */
+        html {
+            scroll-behavior: smooth;
+        }
+        [id] {
+            scroll-margin-top: 90px;
+        }
+    </style>
+</head>
+
+<body class="home page-template-default page page-id-2039 gdlr-core-body woocommerce-no-js ztudiox-body ztudiox-body-front ztudiox-full ztudiox-with-sticky-navigation ztudiox-blockquote-style-1 gdlr-core-link-to-lightbox">
+    <!-- ========== ORIGINAL EDIFY HEADER & MOBILE MENU (same as before) ========== -->
+    <div class="ztudiox-mobile-header-wrap">
+        <div class="ztudiox-mobile-header ztudiox-header-background ztudiox-style-slide ztudiox-sticky-mobile-navigation" id="ztudiox-mobile-header">
+            <div class="ztudiox-mobile-header-container ztudiox-container clearfix">
+                <div class="ztudiox-logo ztudiox-item-pdlr"><div class="ztudiox-logo-inner"><a href="index"><img src="upload/logo-1.png" alt width="120" height="21"></a></div></div>
+                <div class="ztudiox-mobile-menu-right">
+                    <div class="ztudiox-overlay-menu ztudiox-mobile-menu" id="ztudiox-mobile-menu">
+                        <a class="ztudiox-overlay-menu-icon ztudiox-mobile-menu-button" href="#"><span></span></a>
+                        <div class="ztudiox-overlay-menu-content ztudiox-navigation-font">
+                            <div class="ztudiox-overlay-menu-close"></div>
+                            <div class="ztudiox-overlay-menu-row"><div class="ztudiox-overlay-menu-cell">
+                                <ul id="menu-main-navigation" class="menu">
+                                    <li><a href="index">Home</a></li>
+                                    <li><a href="#what-is-edify">About</a></li>
+                                    <li><a href="#crypto-market">Market</a></li>
+                                    <li><a href="#edify-store">Products</a></li>
+                                    <li><a href="#edify-insights">Insights</a></li>
+                                    <li><a href="#footer-contact">Contact</a></li>
+                                </ul>
+                            </div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ztudiox-body-outer-wrapper">
+        <div class="ztudiox-body-wrapper clearfix ztudiox-with-transparent-header ztudiox-with-frame">
+            <div class="ztudiox-header-background-transparent">
+                <header class="ztudiox-header-wrap ztudiox-header-style-plain ztudiox-style-menu-right ztudiox-sticky-navigation ztudiox-style-slide" data-navigation-offset="75px">
+                    <div class="ztudiox-header-background"></div>
+                    <div class="ztudiox-header-container ztudiox-header-full">
+                        <div class="ztudiox-header-container-inner clearfix">
+                            <div class="ztudiox-logo ztudiox-item-pdlr"><div class="ztudiox-logo-inner"><a href="index"><img src="images/logo3.png" alt width="121" height="121"></a></div></div>
+                            <div class="ztudiox-navigation ztudiox-item-pdlr clearfix">
+                                <div class="ztudiox-main-menu-right-wrap clearfix">
+                                    <div class="ztudiox-main-menu-right-text"><i class="" style="font-size:22px;color:#ffda4a;margin-left:12px;margin-right:20px;"></i> <i class="" style="font-size:19px;color:#ffda4a;margin-left:12px;margin-right:15px;"></i>EDIFY ECOSYSTEM</div>
+                                    <div class="ztudiox-overlay-menu ztudiox-main-menu-right" id="ztudiox-right-menu">
+                                        <a class="ztudiox-overlay-menu-icon ztudiox-right-menu-button" href="#"><span></span></a>
+                                        <div class="ztudiox-overlay-menu-content ztudiox-navigation-font">
+                                            <div class="ztudiox-overlay-menu-close">X</div>
+                                            <div class="ztudiox-overlay-menu-row"><div class="ztudiox-overlay-menu-cell">
+                                                <ul id="menu-main-navigation-1" class="menu">
+                                                    <li><a href="index">Home</a></li>
+                                                    <li><a href="#what-is-edify">About</a></li>
+                                                    <li><a href="#crypto-market">Market</a></li>
+                                                    <li><a href="#edify-store">Products</a></li>
+                                                    <li><a href="#edify-insights">Insights</a></li>
+                                                    <li><a href="#footer-contact">Contact</a></li>
+                                                </ul>
+                                            </div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+
+            <div class="ztudiox-page-wrapper" id="ztudiox-page-wrapper">
+                <div class="gdlr-core-page-builder-body">
+                    <!-- HERO SLIDER SECTION (full original content) -->
+                    <div class="gdlr-core-pbf-wrapper smooth-scroll-section" style="padding:0px 0px 0px 0px;">
+                        <div class="gdlr-core-pbf-background-wrap"></div>
+                        <div class="gdlr-core-pbf-wrapper-content gdlr-core-js">
+                            <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-pbf-wrapper-full-no-space">
+                                <div class="gdlr-core-pbf-element">
+                                    <div class="gdlr-core-revolution-slider-item gdlr-core-item-pdlr gdlr-core-item-pdb">
+                                        <div id="rev_slider_1_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" style="margin:0px auto;background:#0a0a0a;padding:0px;margin-top:0px;margin-bottom:0px;">
+                                            <div id="rev_slider_1_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.4.8">
+                                                <ul>
+                                                    <li data-index="rs-1" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-thumb="upload/slider-1-2-100x50.jpg" data-rotate="0" data-saveperformance="off" data-title="Slide">
+                                                        <div class="custom-video-background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden; background-color: #000000;">
+                                                            <video autoplay muted playsinline style="width: 100%; height: 100%; object-fit: contain; background-color: #000000;">
+                                                                <source src="upload/vida.mp4" type="video/mp4">
+                                                            </video>
+                                                        </div>
+                                                        <!-- slider layers (same as original, kept for brevity) -->
+                                                        <div class="tp-caption tp-shape tp-shapewrapper tp-resizeme" id="slide-1-layer-4" data-x="-727" data-y="511" data-width="['1500']" data-height="['12']" data-type="shape" data-responsive_offset="on" data-frames='[{"delay":10,"speed":300,"frame":"0","from":"x:-50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 5;background-color:rgb(255,209,21);"></div>
+                                                        <div class="tp-caption tp-resizeme" id="slide-1-layer-1" data-x="80" data-y="center" data-voffset="-131" data-width="['auto']" data-height="['auto']" data-type="text" data-responsive_offset="on" data-frames='[{"delay":10,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 6; white-space: nowrap; font-size: 32px; line-height: 32px; font-weight: 300; color: #fdcf1c; letter-spacing: 2px;font-family:Poppins;text-transform:uppercase;"></div>
+                                                        <div class="tp-caption tp-resizeme" id="slide-1-layer-3" data-x="72" data-y="center" data-voffset="-47" data-width="['auto']" data-height="['auto']" data-type="text" data-responsive_offset="on" data-frames='[{"delay":360,"speed":300,"frame":"0","from":"x:-50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 7; white-space: nowrap; font-size: 40px; line-height: 150px; font-weight: 700; color: #ffffff; letter-spacing: 0px;font-family:Montserrat;text-transform:uppercase;">EDIFY — A Hub for Innovation, Built for Everyone</div>
+                                                        <div class="tp-caption tp-resizeme" id="slide-1-layer-5" data-x="81" data-y="center" data-voffset="91" data-width="['660']" data-height="['auto']" data-type="text" data-responsive_offset="on" data-frames='[{"delay":700,"speed":300,"frame":"0","from":"x:-50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 8; min-width: 660px; max-width: 660px; white-space: normal; font-size: 17px; line-height: 28px; font-weight: 600; color: #ffffff; letter-spacing: 0px;font-family:Poppins;text-transform:uppercase;">Building the Infrastructure for the Next Generation of Digital Solutions</div>
+                                                        <div class="tp-caption rev-btn rev-withicon" id="slide-1-layer-6" data-x="83" data-y="center" data-voffset="178" data-width="['auto']" data-height="['auto']" data-type="button" data-responsive_offset="on" data-frames='[{"delay":1080,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"0","ease":"Linear.easeNone","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgb(255,218,74);bg:transparent;bs:solid;bw:0 0 0 0;"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 9; white-space: nowrap; font-size: 16px; line-height: 14px; font-weight: 600; color: #ffda4a; letter-spacing: 2px;font-family:Poppins;text-transform:uppercase;background-color:rgba(0,0,0,0);border-color:rgba(0,0,0,1);border-radius:30px 30px 30px 30px;outline:none;box-shadow:none;box-sizing:border-box;cursor:pointer;"><a href="#">Explore Ecosystem</a><i class="fa-icon-long-arrow-right"></i></div>
+                                                        <div class="tp-caption tp-shape tp-shapewrapper tp-resizeme" id="slide-1-layer-7" data-x="84" data-y="center" data-voffset="198" data-width="['78']" data-height="['1']" data-type="shape" data-responsive_offset="on" data-frames='[{"delay":1080,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 10;background-color:rgb(255,218,74);"></div>
+                                                        <div class="tp-caption rev-btn rev-withicon" id="slide-1-layer-9" data-x="1087" data-y="center" data-voffset="340" data-width="['auto']" data-height="['auto']" data-type="button" data-actions='[{"event":"click","action":"simplelink","target":"_self","url":"#","delay":""}]' data-responsive_offset="on" data-frames='[{"delay":1390,"speed":300,"frame":"0","from":"x:50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"0","ease":"Linear.easeNone","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgb(0,0,0);bg:transparent;bs:solid;bw:0 0 0 0;"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 12; white-space: nowrap; font-size: 15px; line-height: 14px; font-weight: 600; color: #000000; letter-spacing: 1px;font-family:Poppins;text-transform:uppercase;background-color:rgba(0,0,0,0);border-color:rgba(0,0,0,1);border-radius:30px 30px 30px 30px;outline:none;box-shadow:none;box-sizing:border-box;cursor:pointer;"><a href="#">Join Community</a> <i class="fa-icon-long-arrow-left"></i></div>
+                                                    </li>
+                                                    <li data-index="rs-3" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-thumb="upload/slider-2-1-100x50.jpg" data-rotate="0" data-saveperformance="off" data-title="Slide">
+                                                        <img src="https://images.pexels.com/photos/27861771/pexels-photo-27861771.jpeg" alt title="slider-2" width="1933" height="1438" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                                                        <div class="tp-caption tp-shape tp-shapewrapper tp-resizeme" data-x="-730" data-y="511" data-width="['1500']" data-height="['12']" data-type="shape" data-frames='[{"delay":10,"speed":300,"frame":"0","from":"x:-50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"}]' style="z-index:5; background:rgb(255,209,21);"></div>
+                                                        <div class="tp-caption tp-resizeme" data-x="80" data-y="center" data-voffset="-131" data-width="['auto']" data-height="['auto']" data-type="text" data-frames='[{"delay":10,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"}]' style="z-index:6; font-size:32px; font-weight:300; color:#fdcf1c; font-family:Poppins; text-transform:uppercase;">A Growing Network of Digital Solutions</div>
+                                                        <div class="tp-caption tp-resizeme" data-x="72" data-y="center" data-voffset="-47" data-width="['auto']" data-height="['auto']" data-type="text" data-frames='[{"delay":360,"speed":300,"frame":"0","from":"x:-50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"}]' style="z-index:7; font-size:137px; line-height:150px; font-weight:700; color:#ffffff; font-family:Montserrat; text-transform:uppercase;">EDIFY</div>
+                                                        <div class="tp-caption tp-resizeme" data-x="81" data-y="center" data-voffset="91" data-width="['660']" data-height="['auto']" data-type="text" data-frames='[{"delay":700,"speed":300,"frame":"0","from":"x:-50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"}]' style="z-index:8; font-size:17px; font-weight:600; color:#ffffff; font-family:Poppins; text-transform:uppercase;">Access Web3-powered applications, digital tools and community-driven projects</div>
+                                                        <div class="tp-caption rev-btn rev-withicon" data-x="83" data-y="center" data-voffset="178" data-width="['auto']" data-height="['auto']" data-type="button" data-frames='[{"delay":1080,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"0","ease":"Linear.easeNone","to":"c:rgb(255,218,74);"}]' style="z-index:9; font-size:16px; font-weight:600; color:#ffda4a; font-family:Poppins; text-transform:uppercase;"><a href="#">Explore Ecosystem</a><i class="fa-icon-long-arrow-right"></i></div>
+                                                    </li>
+                                                </ul>
+                                                <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROADMAP SECTION -->
+                    <div class="gdlr-core-pbf-wrapper smooth-scroll-section" style="padding: 85px 0px 30px 0px;">
+                        <div class="gdlr-core-pbf-background-wrap"></div>
+                        <div class="gdlr-core-pbf-wrapper-content gdlr-core-js">
+                            <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container">
+                                <div class="gdlr-core-pbf-column gdlr-core-column-20 gdlr-core-column-first"><div class="gdlr-core-pbf-column-content-margin"><div class="gdlr-core-pbf-column-content"><div class="gdlr-core-pbf-element"><div class="gdlr-core-title-item" style="padding-bottom:18px;"><div class="gdlr-core-title-item-title-wrap"><h3 style="font-size:20px; font-weight:700; color:#0a0a0a;">Roadmap.</h3></div></div></div><div class="gdlr-core-pbf-element"><div class="gdlr-core-social-network-item" style="padding-bottom:34px;"><a href="https://www.facebook.com/profile.php?id=100086754858210&mibextid=ZbWKwL" target="_blank" style="font-size:20px; color:#0a0a0a;"><i class="fa fa-facebook"></i></a><a href="https://www.youtube.com/@didesirstudios" target="_blank" style="font-size:20px; color:#0a0a0a; margin-left:22px;"><i class="fa fa-youtube"></i></a><a href="https://www.instagram.com/didesirstudios" target="_blank" style="font-size:20px; color:#0a0a0a; margin-left:22px;"><i class="fa fa-instagram"></i></a></div></div><div class="gdlr-core-pbf-element"><div class="gdlr-core-divider-item"><div class="gdlr-core-divider-line" style="border-color:#ffd115; border-bottom-width:3px;"></div></div></div></div></div></div>
+                                <div class="gdlr-core-pbf-column gdlr-core-column-20 stagger-children"><div class="gdlr-core-pbf-column-content-margin"><div class="gdlr-core-pbf-column-content"><div class="gdlr-core-pbf-element"><div class="gdlr-core-text-box-item"><div class="gdlr-core-text-box-item-content"><h4 style="color:#ffda4a;">Phase 1 — Foundation</h4><p>Ecosystem development and structure<br> Brand and platform positioning<br> Introduction of initial projects</p></div></div></div></div></div></div>
+                                <div class="gdlr-core-pbf-column gdlr-core-column-20 stagger-children"><div class="gdlr-core-pbf-column-content-margin"><div class="gdlr-core-pbf-column-content"><div class="gdlr-core-pbf-element"><div class="gdlr-core-text-box-item"><div class="gdlr-core-text-box-item-content"><h4 style="color:#ffda4a;">Phase 2 — Expansion</h4><p>Launch of core utilities (including Edify Store)<br>Growth of community and partnerships<br>Introduction of additional ecosystem projects</p></div></div></div></div></div></div>
+                                <div class="gdlr-core-pbf-column gdlr-core-column-20 stagger-children"><div class="gdlr-core-pbf-column-content-margin"><div class="gdlr-core-pbf-column-content"><div class="gdlr-core-pbf-element"><div class="gdlr-core-text-box-item"><div class="gdlr-core-text-box-item-content"><h4 style="color:#ffda4a;">Phase 3 — Integration</h4><p>Deeper connection between all ecosystem components<br> Advanced tools and services<br> Broader adoption and scalability</p></div></div></div></div></div></div>
+                                <div class="gdlr-core-pbf-element"><div class="gdlr-core-divider-item gdlr-core-divider-item-normal gdlr-core-item-pdlr gdlr-core-left-align gdlr-core-style-vertical" style="margin-bottom:-170px;"><div class="gdlr-core-divider-line" style="border-color:#111111; border-bottom-width:0px; height:0px;"></div><div class="gdlr-core-divider-line-vertical-text" style="color:#111111; font-size:16px; font-weight:700; letter-spacing:4px; text-transform:uppercase;"><i class="gdlr-core-divider-line-vertical-icon arrow_left" style="color:#111111; font-size:23px;"></i></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHAT IS EDIFY ECOSYSTEM (with id) -->
+                    <div id="what-is-edify" class="gdlr-core-pbf-wrapper smooth-scroll-section" style="position:relative; overflow:hidden;"><div style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:0;"><video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover; filter:brightness(0.9);"><source src="upload/vida2.mp4" type="video/mp4"></video></div><div class="gdlr-core-pbf-background-wrap" style="background:rgba(0,0,0,0.6);"></div><div class="gdlr-core-pbf-wrapper-content" style="position:relative; z-index:2;"><div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container"><div class="gdlr-core-pbf-column gdlr-core-column-45"><div class="gdlr-core-pbf-column-content-margin" style="padding:240px 200px 60px 0px;"><div class="gdlr-core-pbf-column-content"><div class="gdlr-core-pbf-element"><div class="gdlr-core-title-item animate-text"><div class="gdlr-core-title-item-title-wrap"><h3 style="font-size:45px; font-weight:700; color:#ffffff;">What is Edify Ecosystem?</h3></div><span style="color:#ffffff;">A Hub for Innovation, Built for Everyone</span></div></div><div class="gdlr-core-pbf-element"><div class="gdlr-core-text-box-item animate-text"><div class="gdlr-core-text-box-item-content" style="color:#f0f0f0;"><p>Edify Ecosystem is a digital infrastructure designed to support the creation and growth of powerful tools, platforms, and decentralized projects. It serves as a central hub where ideas evolve into real-world solutions — connecting users, creators, and communities within one structured environment. Whether it’s digital utilities, marketplaces, or community-driven projects, everything within Edify is built to contribute to a larger, unified system.</p></div></div></div></div></div></div></div></div></div>
+
+                    <!-- 3D ORBIT SECTION -->
+                    <div class="orbit-3d-section smooth-scroll-section">
+                        <video class="orbit-video-bg" autoplay muted loop playsinline><source src="upload/vida4.mp4" type="video/mp4"></video>
+                        <div class="orbit-overlay"></div>
+                        <div class="container-3d">
+                            <div class="orbit-headline animate-text"><div class="sub">✦ balance in motion ✦</div><h2>THERE'S <span style="color:#ffda4a;">WORK</span> AND THERE'S <span style="color:#ffda4a;">PLAY</span></h2><p>A Growing Network of Digital Solutions — where creativity meets structure</p></div>
+                            <div class="orbit-3d-stage"><div id="orbitTrack3D" class="orbit-track-3d"></div><div class="core-3d"><h3>EDIFY ECOSYSTEM</h3><div class="core-tag">∞ infinite orbit | innovate · build · thrive ∞</div></div></div>
+                        </div>
+                    </div>
+
+                    <!-- DASHBOARD SECTION (full PCAT/SDC dashboards) -->
+                    <div class="dashboard-wrapper smooth-scroll-section">
+                        <div class="hub-heading animate-text"><h2>⚡ Edify Ecosystem – The Central Hub for PCAT & SDC</h2><p><span class="highlight">A true marketplace where innovation meets opportunity.</span> PCAT and SDC are just the beginning – Edify provides the infrastructure for anyone to <span class="highlight">build, launch, and grow their own tokens</span> with powerful tools, real‑time dashboards, and community support.</p></div>
+                        <div class="dashboard-stack stagger-children">
+                            <!-- PCAT DASHBOARD -->
+                            <div class="dashboard-card" id="pcatDashboard">
+                                <div class="dashboard-header"><div class="dashboard-header-top"><h1 class="dashboard-token-name">PHENOMENAL CAT (PCAT)</h1><span class="dashboard-network-badge"><i class="fab fa-ethereum"></i> BSC</span></div><div class="dashboard-header-main"><h2>LIVE DASHBOARD</h2><div class="dashboard-pancakeswap-badge"><i class="fas fa-exchange-alt"></i> PANCAKESWAP</div></div></div>
+                                <div class="dashboard-api-status" id="pcatApiStatus"><i class="fas fa-sync-alt fa-spin"></i> Connecting...</div>
+                                <div class="dashboard-token-info-section"><div class="dashboard-token-address"><strong>Contract:</strong> <span id="pcatTokenAddress">0xFeD56F9Cd29F44e7C61c396DAc95cb3ed33d3546</span><button class="dashboard-copy-btn" onclick="copyAddress('pcat')"><i class="far fa-copy"></i></button></div><div class="dashboard-market-cap">MARKET CAP: <strong id="pcatMarketCap" class="dashboard-loading">Loading...</strong></div></div>
+                                <div class="dashboard-stats-grid"><div class="dashboard-stat-item"><div class="dashboard-stat-label">PRICE (USD)</div><div class="dashboard-stat-value dashboard-loading" id="pcatPrice">Loading...</div><div class="dashboard-stat-change" id="pcatPriceChange"></div></div><div class="dashboard-stat-item"><div class="dashboard-stat-label">LIQUIDITY</div><div class="dashboard-stat-value dashboard-loading" id="pcatLiquidity">Loading...</div><div class="dashboard-stat-change" id="pcatLiquidityChange"></div></div><div class="dashboard-stat-item"><div class="dashboard-stat-label">24H VOLUME</div><div class="dashboard-stat-value dashboard-loading" id="pcatVolume24h">Loading...</div><div class="dashboard-stat-change" id="pcatVolume24hChange"></div></div></div>
+                                <div class="dashboard-chart-full-container"><div class="dashboard-chart-header"><div class="dashboard-chart-title">PCAT/WBNB Live Chart</div><div class="dashboard-chart-timeframe"><button class="dashboard-timeframe-btn active" data-time="1h" data-dash="pcat">1H</button><button class="dashboard-timeframe-btn" data-time="4h" data-dash="pcat">4H</button><button class="dashboard-timeframe-btn" data-time="1d" data-dash="pcat">1D</button><button class="dashboard-timeframe-btn" data-time="1w" data-dash="pcat">1W</button><button class="dashboard-timeframe-btn" data-time="1m" data-dash="pcat">1M</button></div></div><div class="chart-wrapper"><iframe id="pcatDexChart" class="dashboard-dexscreener-chart-expanded" src="https://dexscreener.com/bsc/0xFeD56F9Cd29F44e7C61c396DAc95cb3ed33d3546?embed=1&theme=dark&chartInterval=1h" title="PCAT Chart"></iframe></div></div>
+                                <div class="dashboard-data-source-info"><span>DexScreener + BSCScan</span><span>Real-time market data</span></div>
+                                <div class="dashboard-last-updated"><div class="dashboard-update-indicator"></div><span id="pcatLastUpdated">Connecting...</span></div>
+                                <div style="text-align:center; margin:20px 0;"><a href="https://pancakeswap.finance/swap?chain=bsc&inputCurrency=BNB&outputCurrency=0xFeD56F9Cd29F44e7C61c396DAc95cb3ed33d3546" target="_blank" class="btn-buy-small"><i class="fas fa-shopping-cart"></i> Buy $PCAT</a></div>
+                            </div>
+                            <!-- SDC DASHBOARD -->
+                            <div class="dashboard-card" id="newTokenDashboard">
+                                <div class="dashboard-header"><div class="dashboard-header-top"><h1 class="dashboard-token-name" id="newTokenName">SDC Token (?)</h1><span class="dashboard-network-badge"><i class="fab fa-ethereum"></i> BSC</span></div><div class="dashboard-header-main"><h2>LIVE DASHBOARD</h2><div class="dashboard-pancakeswap-badge"><i class="fas fa-exchange-alt"></i> PANCAKESWAP</div></div></div>
+                                <div class="dashboard-api-status" id="newApiStatus"><i class="fas fa-sync-alt fa-spin"></i> Connecting...</div>
+                                <div class="dashboard-token-info-section"><div class="dashboard-token-address"><strong>Contract:</strong> <span id="newTokenAddress">0x8cDC41236C567511f84C12Da10805cF50Dcdc27b</span><button class="dashboard-copy-btn" onclick="copyAddress('new')"><i class="far fa-copy"></i></button></div><div class="dashboard-market-cap">MARKET CAP: <strong id="newMarketCap" class="dashboard-loading">Loading...</strong></div></div>
+                                <div class="dashboard-stats-grid"><div class="dashboard-stat-item"><div class="dashboard-stat-label">PRICE (USD)</div><div class="dashboard-stat-value dashboard-loading" id="newPrice">Loading...</div><div class="dashboard-stat-change" id="newPriceChange"></div></div><div class="dashboard-stat-item"><div class="dashboard-stat-label">LIQUIDITY</div><div class="dashboard-stat-value dashboard-loading" id="newLiquidity">Loading...</div><div class="dashboard-stat-change" id="newLiquidityChange"></div></div><div class="dashboard-stat-item"><div class="dashboard-stat-label">24H VOLUME</div><div class="dashboard-stat-value dashboard-loading" id="newVolume24h">Loading...</div><div class="dashboard-stat-change" id="newVolume24hChange"></div></div></div>
+                                <div class="dashboard-chart-full-container"><div class="dashboard-chart-header"><div class="dashboard-chart-title">SDC / WBNB Live Chart</div><div class="dashboard-chart-timeframe"><button class="dashboard-timeframe-btn active" data-time="1h" data-dash="new">1H</button><button class="dashboard-timeframe-btn" data-time="4h" data-dash="new">4H</button><button class="dashboard-timeframe-btn" data-time="1d" data-dash="new">1D</button><button class="dashboard-timeframe-btn" data-time="1w" data-dash="new">1W</button><button class="dashboard-timeframe-btn" data-time="1m" data-dash="new">1M</button></div></div><div class="chart-wrapper"><iframe id="newDexChart" class="dashboard-dexscreener-chart-expanded" src="https://dexscreener.com/bsc/0x8cDC41236C567511f84C12Da10805cF50Dcdc27b?embed=1&theme=dark&chartInterval=1h" title="SDC Chart"></iframe></div></div>
+                                <div class="dashboard-data-source-info"><span>DexScreener + BSCScan</span><span>Real-time market data</span></div>
+                                <div class="dashboard-last-updated"><div class="dashboard-update-indicator"></div><span id="newLastUpdated">Connecting...</span></div>
+                                <div style="text-align:center; margin:20px 0;"><a href="https://pancakeswap.finance/swap?chain=bsc&inputCurrency=BNB&outputCurrency=0x8cDC41236C567511f84C12Da10805cF50Dcdc27b" target="_blank" class="btn-buy-small"><i class="fas fa-shopping-cart"></i> Buy SDC Token</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CRYPTO MARKET TABLE (with id) -->
+                    <div id="crypto-market" class="crypto-market-section smooth-scroll-section">
+                        <div class="crypto-container">
+                            <div class="crypto-header stagger-children"><div class="crypto-title"><h2><i class="fa fa-line-chart" style="color:#ffda4a;margin-right:8px;"></i> Cryptocurrency Market</h2><p>Real-time prices, market cap, volume and 24h changes • Data via CoinGecko</p></div><div class="crypto-search"><input type="text" id="cryptoSearchInput" placeholder="🔍 Search by coin name or symbol..."></div></div>
+                            <div class="table-wrapper animate-text"><table class="crypto-table" id="cryptoTable"><thead><tr><th data-sort="rank">#</th><th data-sort="name">Name</th><th data-sort="price">Price</th><th data-sort="1h">1h %</th><th data-sort="24h">24h %</th><th data-sort="7d">7d %</th><th data-sort="marketCap">Market Cap</th><th data-sort="volume">Volume(24h)</th><th data-sort="supply">Circulating Supply</th><th>Action</th></tr></thead><tbody id="cryptoTableBody"><tr><td colspan="10" class="loading-spinner"><i class="fa fa-spinner fa-spin"></i> Loading market data...</td></tr></tbody>}</table></div>
+                            <div class="pagination-controls" id="paginationControls"><button class="pagination-btn" id="prevPageBtn" disabled>← Previous</button><span class="page-info" id="pageInfo">Page 1</span><button class="pagination-btn" id="nextPageBtn">Next →</button></div>
+                            <div class="crypto-footer">📊 Showing 12 coins per page | Data updates every 60 seconds</div>
+                        </div>
+                    </div>
+
+                    <!-- VISION & MISSION (condensed) -->
+                    <div class="gdlr-core-pbf-wrapper smooth-scroll-section"><div class="gdlr-core-pbf-background-wrap"><div class="gdlr-core-pbf-background gdlr-core-parallax" style="background-image:url(upload/f10.jpg);background-size:cover;"></div></div><div class="gdlr-core-pbf-wrapper-content"><div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container"><div class="gdlr-core-pbf-column gdlr-core-column-45"><div class="gdlr-core-pbf-column-content-margin" style="padding:200px 200px 90px 0px;"><div><div class="gdlr-core-title-item animate-text"><h3 style="font-size:45px;font-weight:700;color:#eef6f4;">Vision & Mission</h3><span style="color:#191919;">Building the Foundation for What Comes Next</span></div></div><div><div class="gdlr-core-column-service-item stagger-children"><img src="upload/about-icon-3.png" alt width="48"><div><div style="color:#ffda4a;">Our Vision</div><div>To build a structured and accessible digital ecosystem where innovation is simplified, opportunities are expanded, and anyone can interact with powerful tools without complexity.</div></div></div><div class="gdlr-core-column-service-item stagger-children"><img src="upload/about-icon-3.png" alt width="48"><div><div style="color:#ffda4a;">Our Mission</div><div><ul><li>To simplify access to digital and Web3 solutions</li><li>To empower creators to build and launch impactful products</li><li>To create a connected ecosystem where every product strengthens the whole</li><li>To bridge the gap between innovation and everyday usability</li></ul></div></div></div></div></div></div></div></div></div>
+
+                    <!-- EDIFY STORE & USE CASES (with id) -->
+                    <div id="edify-store" class="gdlr-core-pbf-wrapper smooth-scroll-section" style="position:relative;overflow:hidden;padding:80px 0 60px;"><div style="position:absolute;top:0;left:0;width:100%;height:100%;"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"><source src="upload/mt4.mp4" type="video/mp4"></video></div><div class="gdlr-core-pbf-background-wrap" style="background:rgba(0,0,0,0.7);"></div><div class="gdlr-core-pbf-wrapper-content" style="position:relative;z-index:2;"><div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container"><div class="gdlr-core-pbf-column gdlr-core-column-30"><div><div class="gdlr-core-title-item animate-text"><h3 style="font-size:36px;font-weight:700;color:#ffffff;">Introducing Edify Store</h3><span style="color:#ffda4a;">Digital marketplace for discovering powerful tools</span></div></div><div><div class="gdlr-core-text-box-item animate-text"><p style="color:#f0f0f0;">Edify Store is a digital marketplace for discovering and accessing powerful tools, applications, and Web3 solutions. It is designed to showcase not only products built within the Edify Ecosystem, but also innovative tools developed across Africa and the global Web3 space.</p><ul><li>Discover innovative digital tools</li><li>Access Web3-powered applications</li><li>Support African-built solutions</li><li>Seamless and user-friendly experience</li></ul></div></div></div><div class="gdlr-core-pbf-column gdlr-core-column-30"><div><div class="gdlr-core-title-item animate-text"><h3 style="font-size:36px;font-weight:700;color:#ffffff;">Use Cases</h3><span style="color:#ffda4a;">Built for Real-World Impact</span></div></div><div><div class="gdlr-core-text-box-item animate-text"><p style="color:#f0f0f0;">Edify Ecosystem supports a wide range of applications, including:</p><ul><li>Digital commerce and marketplaces</li><li>Learning and knowledge platforms</li><li>Community-driven economies</li><li>Decentralized applications and tools</li></ul></div></div></div></div></div></div>
+
+                    <!-- EDIFY INSIGHTS + COMMUNITY + TRANSPARENCY (with id) -->
+                    <div id="edify-insights" class="gdlr-core-pbf-wrapper smooth-scroll-section" style="padding:60px 0;background:#111;"><div class="gdlr-core-pbf-wrapper-content"><div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container"><div class="gdlr-core-pbf-column gdlr-core-column-20"><div><div class="gdlr-core-title-item animate-text"><h3 style="font-size:28px;font-weight:700;color:#ffffff;">Edify Insights</h3><span style="color:#ffda4a;">Insights, Updates & Knowledge</span></div></div><div><div class="gdlr-core-text-box-item animate-text"><p style="color:#ccc;">Edify Insights is the official media and knowledge hub of the ecosystem — a space where users can stay informed, learn, and explore.</p><ul><li>Ecosystem Updates</li><li>Project Spotlights</li><li>Education & Web3 Insights</li><li>Vision & Strategy</li></ul></div></div></div><div class="gdlr-core-pbf-column gdlr-core-column-20"><div><div class="gdlr-core-title-item animate-text"><h3 style="font-size:28px;font-weight:700;color:#ffffff;">Community</h3><span style="color:#ffda4a;">Be Part of the Ecosystem</span></div></div><div><div class="gdlr-core-text-box-item animate-text"><p style="color:#ccc;">Join a growing community of thinkers, creators, and innovators shaping the future together.</p><div style="margin-top:20px;"><a href="#" style="display:inline-block;margin-right:20px;color:#ffda4a;"><i class="fa fa-twitter"></i> X</a><a href="#" style="display:inline-block;margin-right:20px;color:#ffda4a;"><i class="fa fa-telegram"></i> Telegram</a><a href="#" style="display:inline-block;color:#ffda4a;"><i class="fa fa-discord"></i> Discord</a></div></div></div></div><div class="gdlr-core-pbf-column gdlr-core-column-20"><div><div class="gdlr-core-title-item animate-text"><h3 style="font-size:28px;font-weight:700;color:#ffffff;">Transparency</h3><span style="color:#ffda4a;">Clarity Builds Trust</span></div></div><div><div class="gdlr-core-text-box-item animate-text"><p style="color:#ccc;">We are committed to building with transparency, structure, and long-term vision. As the ecosystem evolves, more technical details will be made available.</p></div></div></div></div></div></div>
+
+                    <!-- TRADING CHART SECTION -->
+                    <div class="gdlr-core-pbf-wrapper smooth-scroll-section" style="padding:60px 0;background:#fff;"><div class="gdlr-core-pbf-wrapper-content"><div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container"><div class="gdlr-core-pbf-element"><div class="gdlr-core-title-item gdlr-core-left-align animate-text" style="margin-bottom:30px;"><h3 style="font-size:32px;font-weight:700;color:#0a0a0a;">📈 Live Trading Chart</h3><span style="color:#5b6e8c;">Interactive real-time market data — BTC/USDT (TradingView)</span></div></div><div class="gdlr-core-pbf-element"><div class="trading-chart-container animate-text" style="border-radius:24px;overflow:hidden;box-shadow:0 20px 35px -12px rgba(0,0,0,0.1);background:#fff;"><div id="tradingview_chart" style="height:550px;width:100%;"></div></div></div></div></div></div>
+
+                    <!-- EPIC CENTER OF CREATIVITY SECTION -->
+                    <div class="gdlr-core-pbf-wrapper smooth-scroll-section" style="padding:120px 0 90px;position:relative;overflow:hidden;"><div class="video-background-container" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"><source src="upload/vida3.mp4" type="video/mp4"></video><div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:1;"></div></div><div class="gdlr-core-pbf-wrapper-content" style="position:relative;z-index:2;"><div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container"><div class="gdlr-core-pbf-column gdlr-core-column-30"><div><div class="gdlr-core-image-item animate-text"><a class="gdlr-core-ilightbox" href="images/e1.png"><img src="images/f8.png" width="800" height="513" alt="Epic Center of Creativity"><span class="gdlr-core-image-overlay"><i class="fa fa-search"></i></span></a></div></div></div><div class="gdlr-core-pbf-column gdlr-core-column-30"><div class="gdlr-core-pbf-column-content-margin" style="padding:50px 30px 0 50px;"><div><div class="gdlr-core-title-item animate-text"><span style="color:#ffd115;">Epic Center of Creativity</span><h3 style="font-size:27px;font-weight:700;color:#ffffff;">Focus on the mission</h3></div></div><div><div class="gdlr-core-text-box-item animate-text"><p style="font-size:16px;font-weight:600;color:#f0f0f0;">Our mission is to unlock the world’s untapped potential. Edify Ecosystem uses blockchain and community-driven innovation to create a trustless economy for grassroots ideas, allowing anyone, anywhere, to submit an idea, secure funding, and build a legacy.</p></div></div></div></div></div></div></div>
+
+                    <!-- ===== DONATE SECTION (new) ===== -->
+                    <section id="donate-section" class="donate-section smooth-scroll-section">
+                        <div class="donate-container">
+                            <h2 class="donate-title" style="color: #ffffff;">Support the Edify Ecosystem</h2>
+                            <p class="donate-description">Your contributions help us build and expand the Edify Ecosystem. Every donation goes directly to development, community growth, and innovation.</p>
+                            <div class="donate-address-box">
+                                <span class="donate-address">0x3C0732de01Db4f7C75850D8AFeeA17cbD35fF18B</span>
+                                <button class="donate-copy-btn" onclick="copyDonateAddress()"><i class="fas fa-copy"></i> Copy Address</button>
+                            </div>
+                           
+                            <p class="donate-note"><i class="fas fa-shield-alt"></i> This is a BNB BEP20 address</p>
+                        </div>
+                    </section>
+
+                    <!-- ===== NEW MODERN FOOTER (quick links match main nav) ===== -->
+                    <footer id="footer-contact" class="new-footer">
+                        <div class="footer-container">
+                            <div class="footer-grid">
+                                <div class="footer-col"><h4>Edify Ecosystem</h4><p>Edify Ecosystem is a digital infrastructure designed to support the creation and growth of powerful tools, platforms, and decentralized projects. A true hub for innovation, built for everyone.</p><div class="footer-social"><a href="#"><i class=></i></a><a href="#"><i class=""></i></a><a href="#"><i class=""></i></a><a href="#"><i class=""></i></a><a href="#"><i class=""></i></a></div></div>
+                                <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index">Home</a></li><li><a href="#what-is-edify">About</a></li><li><a href="#crypto-market">Market</a></li><li><a href="#edify-store">Products</a></li><li><a href="#edify-insights">Insights</a></li><li><a href="#footer-contact">Contact</a></li></ul></div>
+                                <div class="footer-col"><h4>Resources</h4><ul><li><a href="#">Help Center</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Whitepaper</a></li><li><a href="#">Community Guidelines</a></li></ul></div>
+                                <div class="footer-col"><h4>Stay Updated</h4><p>Subscribe to our newsletter for the latest updates.</p><div class="newsletter-form"><input type="email" placeholder="Your email address"><button>Subscribe →</button></div><p style="margin-top:20px;"><i class=""></i> </p><p><i class=""></i> </p></div>
+                            </div>
+                            
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts (jQuery, RevSlider, TradingView) -->
+    <script src='js/jquery/jquery.js'></script>
+    <script src='js/jquery/jquery-migrate.min.js'></script>
+    <script src='plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js'></script>
+    <script src='plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js'></script>
+    <script src="plugins/revslider/public/assets/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script src="plugins/revslider/public/assets/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script src="plugins/revslider/public/assets/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script src="plugins/revslider/public/assets/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script src="plugins/revslider/public/assets/js/extensions/revolution.extension.parallax.min.js"></script>
+    <script src="plugins/revslider/public/assets/js/extensions/revolution.extension.actions.min.js"></script>
+    <script src="plugins/revslider/public/assets/js/extensions/revolution.extension.video.min.js"></script>
+    <script src='plugins/goodlayers-core/plugins/combine/script.js'></script>
+    <script>var gdlr_core_pbf = {"admin":"","video":{"width":"640","height":"360"},"ajax_url":"","ilightbox_skin":"dark"};</script>
+    <script src='plugins/goodlayers-core/include/js/page-builder.js'></script>
+    <script src='js/jquery/ui/effect.min.js'></script>
+    <script src='js/jquery.mmenu.min.js'></script>
+    <script src='js/jquery.superfish.min.js'></script>
+    <script>var ztudiox_script_core = {"home_url":"index.html"};</script>
+    <script src='js/plugins.min.js'></script>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+    <script>
+        // ========== CRYPTO MARKET SCRIPT (original) ==========
+        (function() {
+            let cryptoData = [], filteredData = [], currentPage = 1, rowsPerPage = 12, sortColumn = 'rank', sortDirection = 'asc';
+            const searchInput = document.getElementById('cryptoSearchInput'), tbody = document.getElementById('cryptoTableBody'), prevBtn = document.getElementById('prevPageBtn'), nextBtn = document.getElementById('nextPageBtn'), pageInfo = document.getElementById('pageInfo');
+            function formatNumber(num) { if (num === undefined || num === null) return 'N/A'; if (num >= 1e12) return '$' + (num / 1e12).toFixed(2) + 'T'; if (num >= 1e9) return '$' + (num / 1e9).toFixed(2) + 'B'; if (num >= 1e6) return '$' + (num / 1e6).toFixed(2) + 'M'; if (num >= 1e3) return '$' + (num / 1e3).toFixed(2) + 'K'; return '$' + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+            function formatSupply(supply) { if (!supply) return 'N/A'; if (supply >= 1e9) return (supply / 1e9).toFixed(2) + 'B'; if (supply >= 1e6) return (supply / 1e6).toFixed(2) + 'M'; if (supply >= 1e3) return (supply / 1e3).toFixed(2) + 'K'; return supply.toLocaleString(); }
+            function renderTable() { if (!tbody) return; const start = (currentPage - 1) * rowsPerPage, pageData = filteredData.slice(start, start + rowsPerPage); if (pageData.length === 0 && filteredData.length > 0) { currentPage = Math.max(1, Math.ceil(filteredData.length / rowsPerPage)); renderTable(); return; } if (pageData.length === 0) { tbody.innerHTML = '<tr><td colspan="10" class="error-message">No cryptocurrencies match your search. </tr><table>'; updatePagination(); return; } let html = ''; pageData.forEach((coin, idx) => { const globalIndex = start + idx + 1; html += `<tr><td>${globalIndex}</td><td class="coin-cell"><img class="coin-icon" src="${coin.image}" onerror="this.src='https://placehold.co/24x24'" alt=""> ${coin.name} (${coin.symbol.toUpperCase()})</td><td class="price">${formatNumber(coin.current_price)}</td><td class="${(coin.price_change_percentage_1h_in_currency || 0) >= 0 ? 'positive' : 'negative'}">${(coin.price_change_percentage_1h_in_currency || 0).toFixed(2)}%</td><td class="${(coin.price_change_percentage_24h || 0) >= 0 ? 'positive' : 'negative'}">${(coin.price_change_percentage_24h || 0).toFixed(2)}%</td><td class="${(coin.price_change_percentage_7d_in_currency || 0) >= 0 ? 'positive' : 'negative'}">${(coin.price_change_percentage_7d_in_currency || 0).toFixed(2)}%</td><td>${formatNumber(coin.market_cap)}</td><td>${formatNumber(coin.total_volume)}</td><td>${formatSupply(coin.circulating_supply)} ${coin.symbol.toUpperCase()}</td><td><button class="buy-btn" onclick="alert('Buy ${coin.name} functionality coming soon')">Buy</button></td></tr>`; }); tbody.innerHTML = html; updatePagination(); }
+            function updatePagination() { const totalPages = Math.ceil(filteredData.length / rowsPerPage); pageInfo.innerText = `Page ${currentPage} of ${totalPages || 1}`; prevBtn.disabled = currentPage <= 1; nextBtn.disabled = currentPage >= totalPages; }
+            function filterAndSort() { let data = [...cryptoData]; const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : ''; if (searchTerm) data = data.filter(coin => coin.name.toLowerCase().includes(searchTerm) || coin.symbol.toLowerCase().includes(searchTerm)); data.sort((a,b) => { let valA, valB; if (sortColumn === 'rank') { valA = a.market_cap_rank || Infinity; valB = b.market_cap_rank || Infinity; } else if (sortColumn === 'name') { valA = a.name; valB = b.name; } else if (sortColumn === 'price') { valA = a.current_price || 0; valB = b.current_price || 0; } else if (sortColumn === '1h') { valA = a.price_change_percentage_1h_in_currency || 0; valB = b.price_change_percentage_1h_in_currency || 0; } else if (sortColumn === '24h') { valA = a.price_change_percentage_24h || 0; valB = b.price_change_percentage_24h || 0; } else if (sortColumn === '7d') { valA = a.price_change_percentage_7d_in_currency || 0; valB = b.price_change_percentage_7d_in_currency || 0; } else if (sortColumn === 'marketCap') { valA = a.market_cap || 0; valB = b.market_cap || 0; } else if (sortColumn === 'volume') { valA = a.total_volume || 0; valB = b.total_volume || 0; } else if (sortColumn === 'supply') { valA = a.circulating_supply || 0; valB = b.circulating_supply || 0; } else { valA = a.market_cap_rank || Infinity; valB = b.market_cap_rank || Infinity; } if (typeof valA === 'string') return sortDirection === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA); return sortDirection === 'asc' ? valA - valB : valB - valA; }); filteredData = data; currentPage = 1; renderTable(); }
+            async function fetchMarketData() { try { tbody.innerHTML = '<tr><td colspan="10" class="loading-spinner"><i class="fa fa-spinner fa-spin"></i> Loading...</td></tr>'; const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=1h,24h,7d'; const response = await fetch(url); if (!response.ok) throw new Error(`HTTP ${response.status}`); const data = await response.json(); cryptoData = data; filterAndSort(); } catch (err) { tbody.innerHTML = `<tr><td colspan="10" class="error-message">⚠️ Failed to load market data. (${err.message})</td></tr>`; } }
+            document.querySelectorAll('#cryptoTable th[data-sort]').forEach(th => th.addEventListener('click', () => { const column = th.getAttribute('data-sort'); if (sortColumn === column) sortDirection = sortDirection === 'asc' ? 'desc' : 'asc'; else { sortColumn = column; sortDirection = 'asc'; } filterAndSort(); }));
+            if (searchInput) searchInput.addEventListener('input', () => { filterAndSort(); });
+            if (prevBtn) prevBtn.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTable(); } });
+            if (nextBtn) nextBtn.addEventListener('click', () => { const totalPages = Math.ceil(filteredData.length / rowsPerPage); if (currentPage < totalPages) { currentPage++; renderTable(); } });
+            fetchMarketData(); setInterval(fetchMarketData, 60000);
+        })();
+
+        // TradingView Widget
+        document.addEventListener("DOMContentLoaded", function() { if (typeof TradingView !== 'undefined') { new TradingView.widget({ "width": "100%", "height": 550, "symbol": "BINANCE:BTCUSDT", "interval": "60", "timezone": "Etc/UTC", "theme": "light", "style": "1", "locale": "en", "toolbar_bg": "#f1f3f6", "enable_publishing": false, "allow_symbol_change": true, "container_id": "tradingview_chart", "hide_side_toolbar": false, "details": true, "studies": ["RSI", "MACD", "Volume"], "show_popup_button": true }); } else { document.getElementById("tradingview_chart").innerHTML = '<div style="padding:40px;text-align:center;">⚠️ TradingView load error</div>'; } });
+
+        // 3D ORBIT SCRIPT
+        (function() {
+            const imagesData = [
+                { src: "https://picsum.photos/id/1/150/150", label: "⚡ deep work" }, { src: "https://picsum.photos/id/10/150/150", label: "🎧 creative flow" }, { src: "https://picsum.photos/id/20/150/150", label: "💡 brainstorming" }, { src: "https://picsum.photos/id/30/150/150", label: "🎾 play & energy" }, { src: "https://picsum.photos/id/40/150/150", label: "🎨 art vibes" }, { src: "https://picsum.photos/id/50/150/150", label: "🤝 collaboration" }, { src: "https://picsum.photos/id/60/150/150", label: "🏄‍♂️ freedom" }, { src: "https://picsum.photos/id/70/150/150", label: "🎯 strategy" }, { src: "https://picsum.photos/id/80/150/150", label: "🎹 play mode" }, { src: "https://picsum.photos/id/90/150/150", label: "🌱 growth" }
+            ];
+            const track = document.getElementById('orbitTrack3D');
+            let orbitElements = [], baseAngles = [], globalAngle = 0, animId = null, centerX, centerY, radius = 220;
+            function buildOrbit() { if (!track) return; track.innerHTML = ''; orbitElements = []; imagesData.forEach((item, i) => { const div = document.createElement('div'); div.className = 'orbit-img-3d'; div.setAttribute('data-label', item.label); const img = document.createElement('img'); img.src = item.src; img.alt = `orbit-${i}`; div.appendChild(img); track.appendChild(div); orbitElements.push(div); baseAngles.push((i / imagesData.length) * Math.PI * 2); }); }
+            function updateGeometry() { if (!track) return; const rect = track.getBoundingClientRect(); centerX = rect.width / 2; centerY = rect.height / 2; const minDim = Math.min(rect.width, rect.height); radius = Math.min(minDim * 0.32, 280); radius = Math.max(radius, 130); }
+            function positionImages() { orbitElements.forEach((el, i) => { const angle = baseAngles[i] + globalAngle; const x = centerX + radius * Math.cos(angle); const y = centerY + radius * Math.sin(angle); el.style.left = `${x}px`; el.style.top = `${y}px`; el.style.transform = 'translate(-50%, -50%)'; }); }
+            function animate() { globalAngle += 0.0072; if (globalAngle > Math.PI * 2) globalAngle -= Math.PI * 2; positionImages(); animId = requestAnimationFrame(animate); }
+            function handleResize() { updateGeometry(); positionImages(); }
+            if (track) { buildOrbit(); updateGeometry(); positionImages(); animate(); window.addEventListener('resize', () => { setTimeout(handleResize, 80); }); setTimeout(handleResize, 100); }
+        })();
+
+        // SMOOTH SCROLL ANIMATIONS: fade + Y movement + scale, tied to scroll position with scrub
+        document.addEventListener('DOMContentLoaded', function() {
+            gsap.registerPlugin(ScrollTrigger);
+            // Animate each smooth-scroll-section: opacity, y, scale based on scroll progress
+            gsap.utils.toArray('.smooth-scroll-section').forEach((section) => {
+                gsap.fromTo(section,
+                    { opacity: 0, y: 40, scale: 0.95 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 1,
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 85%",
+                            end: "top 15%",
+                            scrub: 0.5,    // smooth transition tied to scroll
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+            // For .animate-text elements (inside sections) – independent but also scrub-based
+            gsap.utils.toArray('.animate-text').forEach((el) => {
+                gsap.fromTo(el,
+                    { opacity: 0, y: 30, scale: 0.9 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 90%",
+                            end: "top 20%",
+                            scrub: 0.4,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+            // Stagger children
+            gsap.utils.toArray('.stagger-children').forEach((container) => {
+                const children = container.children;
+                gsap.fromTo(children,
+                    { opacity: 0, y: 30, scale: 0.95 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.8,
+                        stagger: 0.08,
+                        scrollTrigger: {
+                            trigger: container,
+                            start: "top 85%",
+                            end: "top 15%",
+                            scrub: 0.4,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+        });
+
+        // Dashboard JavaScript (real-time data)
+        const UPDATE_INTERVAL = 30000;
+        async function fetchDexData(address) {
+            const resp = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${address}`);
+            const data = await resp.json();
+            if (!data.pairs || !data.pairs.length) throw new Error('No pairs');
+            const pair = data.pairs.reduce((a,b) => (parseFloat(a.liquidity?.usd)||0) > (parseFloat(b.liquidity?.usd)||0) ? a : b);
+            return {
+                price: parseFloat(pair.priceUsd) || 0,
+                liquidity: parseFloat(pair.liquidity?.usd) || 0,
+                volume24h: parseFloat(pair.volume?.h24) || 0,
+                priceChange24h: parseFloat(pair.priceChange?.h24) || 0,
+                marketCap: parseFloat(pair.fdv) || 0,
+                tokenName: pair.baseToken?.name || "Token"
+            };
+        }
+        class TokenDashboard {
+            constructor(prefix, contractAddress) { this.prefix = prefix; this.address = contractAddress; this.fetchRealTime(); this.startLiveUpdates(); }
+            async fetchRealTime() { try { this.setStatus('loading'); const dexData = await fetchDexData(this.address); this.updateUI(dexData); this.setStatus('ok'); } catch(err) { console.error(`${this.prefix} error:`, err); this.setStatus('error'); this.updateUI({ price:0, liquidity:0, volume24h:0, priceChange24h:0, marketCap:0, tokenName:"Token" }); } }
+            updateUI(dexData) { if (this.prefix === 'new') { const nameEl = document.getElementById('newTokenName'); if (nameEl && dexData.tokenName) nameEl.innerText = `${dexData.tokenName} (SDC)`; } this.updateMetric('Price', dexData.price, true, '$', 12); this.updateMetric('MarketCap', dexData.marketCap, true, '$'); this.updateMetric('Liquidity', dexData.liquidity, true, '$'); this.updateMetric('Volume24h', dexData.volume24h, true, '$'); this.updateChange('PriceChange', dexData.priceChange24h); this.updateTimestamp(); }
+            updateMetric(idKey, value, compact=false, prefix='') { const el = document.getElementById(`${this.prefix}${idKey}`); if (!el) return; el.classList.remove('dashboard-loading'); let display; if (idKey === 'Price') display = value.toFixed(12); else if (compact && value >= 1e6) display = (value/1e6).toFixed(2)+'M'; else if (compact && value >= 1e3) display = (value/1e3).toFixed(2)+'K'; else display = value.toLocaleString(); if (prefix) display = prefix + display; el.textContent = display; }
+            updateChange(idKey, val) { const el = document.getElementById(`${this.prefix}${idKey}`); if (!el) return; const isPos = val >= 0; el.textContent = `${isPos ? '+' : ''}${val.toFixed(2)}%`; el.className = `dashboard-stat-change ${isPos ? 'positive' : 'negative'}`; }
+            updateTimestamp() { const now = new Date(); const el = document.getElementById(`${this.prefix}LastUpdated`); if (el) el.textContent = `Last updated: ${now.toLocaleTimeString()}`; }
+            setStatus(status) { const el = document.getElementById(`${this.prefix}ApiStatus`); if (!el) return; if (status === 'loading') { el.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Fetching live data...'; el.style.background = '#1a3a1a'; el.style.color = '#4CAF50'; } else if (status === 'ok') el.innerHTML = '<i class="fas fa-check-circle"></i> Live data active'; else { el.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Using cached estimates'; el.style.background = '#3a3a1a'; el.style.color = '#ff9800'; } }
+            startLiveUpdates() { this.fetchRealTime(); setInterval(() => this.fetchRealTime(), UPDATE_INTERVAL); setInterval(() => this.updateTimestamp(), 1000); }
+        }
+        function copyAddress(dashPrefix) { let addr = dashPrefix === 'pcat' ? '0xFeD56F9Cd29F44e7C61c396DAc95cb3ed33d3546' : '0x8cDC41236C567511f84C12Da10805cF50Dcdc27b'; navigator.clipboard.writeText(addr); const btn = document.querySelector(`#${dashPrefix === 'pcat' ? 'pcatDashboard' : 'newTokenDashboard'} .dashboard-copy-btn`); const orig = btn.innerHTML; btn.innerHTML = '<i class="fas fa-check"></i> Copied!'; btn.style.color = '#28a745'; setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 2000); }
+        function initTimeframeButtons() { document.querySelectorAll('.dashboard-timeframe-btn').forEach(btn => { btn.addEventListener('click', function() { const dash = this.getAttribute('data-dash'); const iframe = document.getElementById(`${dash}DexChart`); const tf = this.getAttribute('data-time'); const baseUrl = dash === 'pcat' ? 'https://dexscreener.com/bsc/0xFeD56F9Cd29F44e7C61c396DAc95cb3ed33d3546' : 'https://dexscreener.com/bsc/0x8cDC41236C567511f84C12Da10805cF50Dcdc27b'; iframe.src = `${baseUrl}?embed=1&theme=dark&chartInterval=${tf}`; document.querySelectorAll(`#${dash === 'pcat' ? 'pcatDashboard' : 'newTokenDashboard'} .dashboard-timeframe-btn`).forEach(b => b.classList.remove('active')); this.classList.add('active'); }); }); }
+        setInterval(() => { document.querySelectorAll('.dashboard-card').forEach(card => { card.classList.add('glowing'); setTimeout(() => card.classList.remove('glowing'), 2000); }); }, 30000);
+        document.addEventListener('DOMContentLoaded', () => { new TokenDashboard('pcat', '0xFeD56F9Cd29F44e7C61c396DAc95cb3ed33d3546'); new TokenDashboard('new', '0x8cDC41236C567511f84C12Da10805cF50Dcdc27b'); initTimeframeButtons(); });
+
+        function copyDonateAddress() { let addr = '0x3C0732de01Db4f7C75850D8AFeeA17cbD35fF18B'; navigator.clipboard.writeText(addr); const btn = document.querySelector('.donate-copy-btn'); const orig = btn.innerHTML; btn.innerHTML = '<i class="fas fa-check"></i> Copied!'; btn.style.background = '#28a745'; btn.style.color = 'white'; setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.color = ''; }, 2000); }
+    </script>
+
+    <!-- Revolution Slider initialization (original) -->
+    <script>function setREVStartSize(e){ try { e.c=jQuery(e.c); var i=jQuery(window).width(),t=9999,r=0,n=0,l=0,f=0,s=0,h=0; if(e.responsiveLevels&&(jQuery.each(e.responsiveLevels,function(e,f){f>i&&(t=r=f,l=e),i>f&&f>r&&(r=f,n=e)}),t>r&&(l=n)),f=e.gridheight[l]||e.gridheight[0]||e.gridheight,s=e.gridwidth[l]||e.gridwidth[0]||e.gridwidth,h=i/s,h=h>1?1:h,f=Math.round(h*f),"fullscreen"==e.sliderLayout){var u=(e.c.width(),jQuery(window).height()); if(void 0!=e.fullScreenOffsetContainer){var c=e.fullScreenOffsetContainer.split(",");if(c) jQuery.each(c,function(e,i){u=jQuery(i).length>0?u-jQuery(i).outerHeight(!0):u}),e.fullScreenOffset.split("%").length>1&&void 0!=e.fullScreenOffset&&e.fullScreenOffset.length>0?u-=jQuery(window).height()*parseInt(e.fullScreenOffset,0)/100:void 0!=e.fullScreenOffset&&e.fullScreenOffset.length>0&&(u-=parseInt(e.fullScreenOffset,0))}f=u} else void 0!=e.minHeight&&f<e.minHeight&&(f=e.minHeight); e.c.closest(".rev_slider_wrapper").css({height:f})} catch(d){console.log("Failure at Presize of Slider:"+d)} };
+        if (setREVStartSize !== undefined) setREVStartSize({c:'#rev_slider_1_1',gridwidth:[1440],gridheight:[1040],sliderLayout:'auto'});
+        var revapi1,tpj; (function(){ if(!/loaded|interactive|complete/.test(document.readyState)) document.addEventListener("DOMContentLoaded",onLoad); else onLoad(); function onLoad(){ if(tpj===undefined){ tpj=jQuery; if("off"=="on") tpj.noConflict(); } if(tpj("#rev_slider_1_1").revolution==undefined){ revslider_showDoubleJqueryError("#rev_slider_1_1"); }else{ revapi1=tpj("#rev_slider_1_1").show().revolution({ sliderType:"standard", sliderLayout:"auto", dottedOverlay:"none", delay:9000, navigation:{ bullets:{ enable:true, style:"uranus", h_align:"center", v_align:"bottom", h_offset:0, v_offset:35, space:8 } }, gridwidth:1440, gridheight:1040, lazyType:"none", shadow:0, spinner:"off", stopLoop:"off", stopAfterLoops:-1, stopAtSlide:-1, shuffle:"off", autoHeight:"off", disableProgressBar:"on", hideThumbsOnMobile:"off", hideSliderAtLimit:0, hideCaptionAtLimit:0, debugMode:false, fallbacks:{ simplifyAll:"off", nextSlideOnWindowFocus:"off", disableFocusListener:false } }); } }; })();
+        (function(){ function forceVideoPlay(){ var video=document.querySelector('#rev_slider_1_1 .custom-video-background video'); if(video&&video.tagName==='VIDEO'){ video.muted=true; var playPromise=video.play(); if(playPromise!==undefined){ playPromise.catch(()=>{ setTimeout(()=>video.play().catch(()=>{}),1000); }); } return true; } return false; } var attempts=0; var interval=setInterval(function(){ if(forceVideoPlay()) clearInterval(interval); attempts++; if(attempts>=20) clearInterval(interval); },500); if(typeof revapi1!=='undefined'){ revapi1.on('revolution.slide.onloaded',()=>setTimeout(forceVideoPlay,200)); revapi1.on('revolution.slide.onchange',()=>setTimeout(forceVideoPlay,100)); } })();
+    </script>
+</body>
+</html>
